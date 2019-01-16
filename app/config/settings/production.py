@@ -4,7 +4,7 @@ import requests
 PRODUCTION_JSON = json.load(open(os.path.join(SECRET_DIR, 'production.json')))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # 아마존에서 제공해주는 URL에 접속을 허용하는 코드
 ALLOWED_HOSTS = [
