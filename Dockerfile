@@ -1,4 +1,4 @@
-FROM        hangang-coin:base
+FROM        m41d/hangang-coin:base
 
 COPY        ./ /srv/projects
 
