@@ -1,5 +1,7 @@
 from .base import *
 import requests
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 PRODUCTION_JSON = json.load(open(os.path.join(SECRET_DIR, 'production.json')))
 
@@ -11,6 +13,11 @@ ALLOWED_HOSTS = [
     '.amazonaws.com',
     '.m41d.kr',
 ]
+
+sentry_sdk.init(
+    dsn="https://925b7abfc0b74ef9bc6d3175516974a9@sentry.io/1372674",
+    integrations=[DjangoIntegration()]
+)
 
 # Health Check 도메인을 허용하는 코드
 try:

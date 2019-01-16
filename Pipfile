@@ -10,6 +10,7 @@ awscli = "*"
 [packages]
 django = "*"
 requests = "*"
+sentry-sdk = "==0.6.6"
 
 [requires]
 python_version = "3.6"
