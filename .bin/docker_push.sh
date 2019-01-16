@@ -4,17 +4,13 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
 # master 브랜치일경우만 push가 실행되도록한다.
 if [ "$TRAVIS_BRANCH" == "master" ]; then
 
-eval $(aws ecr get-login --no-include-email --region ap-northeast-2)
+docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
 # Build and push
 docker build -t $IMAGE_NAME:base -f Dockerfile.base .
+docker push "$IMAGE_NAME:base"
 docker build -t $IMAGE_NAME .
-echo "Pushing $IMAGE_NAME"
-docker tag $IMAGE_NAME:latest "$REMOTE_IMAGE_URL:latest"
-docker tag $IMAGE_NAME:base "$REMOTE_IMAGE_URL:base"
-docker push "$REMOTE_IMAGE_URL:base"
-docker push "$REMOTE_IMAGE_URL:latest"
-echo "Pushed $IMAGE_NAME:latest"
+docker push "$IMAGE_NAME:latest"
 
 else
 echo "Skipping deploy because branch is not 'master'"
