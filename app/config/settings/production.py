@@ -1,14 +1,22 @@
 from .base import *
+import requests
 
 PRODUCTION_JSON = json.load(open(os.path.join(SECRET_DIR, 'production.json')))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# 아마존에서 제공해주는 URL에 접속을 허용하는 코드
 ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost',
+    '.amazonaws.com',
 ]
+
+# Health Check 도메인을 허용하는 코드
+try:
+    EC2_IP = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4').text
+    ALLOWED_HOSTS.append(EC2_IP)
+except requests.exceptions.RequestException:
+    pass
 
 STATIC_ROOT = os.path.join(ROOT_DIR, '.static')
 

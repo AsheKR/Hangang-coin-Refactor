@@ -1,4 +1,4 @@
-FROM        ecs-deploy:base
+FROM        hangang-coin:base
 
 COPY        ./ /srv/projects
 
