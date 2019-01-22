@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from coin.views import home_page as home
+
 urlpatterns = [
+    path('', home, ),
     path('admin/', admin.site.urls),
 ]
