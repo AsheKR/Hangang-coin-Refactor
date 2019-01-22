@@ -40,6 +40,14 @@ class Coin(models.Model):
                 pair_name = re.sub(r'(\w+)/(\w+)', r'\g<1>_\g<2>', pair.lower())
                 cls.CURRENCY_PAIR.append((currency, pair_name))
 
+    @property
+    def today_master_value(self):
+        return self.coinvalue_set.filter(is_day_master=True).last().value
+
+    @property
+    def latest_value(self):
+        return self.coinvalue_set.last().value
+
 
 class CoinValue(models.Model):
     coin = models.ForeignKey(
