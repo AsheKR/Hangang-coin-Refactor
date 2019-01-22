@@ -20,7 +20,7 @@ install:
   - sudo chmod +x /usr/bin/ecs-deploy
 
 script:
-  - pytest --cov=./
+  - app/pytest --cov=./
 
 after_success:
   - codecov -t $CODECOV_TOEKEN
