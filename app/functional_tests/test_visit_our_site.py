@@ -1,4 +1,4 @@
-from app.functional_tests.base import FunctionalTest
+from .base import FunctionalTest
 
 
 class NewVisitorTest(FunctionalTest):
@@ -8,6 +8,7 @@ class NewVisitorTest(FunctionalTest):
         self.browser.get(self.live_server_url)
 
         # 홈페이지의 타이틀이 한강 코인인것을 확인한다.
+        self.assertIn('한강 코인', self.browser.title)
 
         # 현재 코인값과 대표값이 내려왔는지 확인한다.
 
