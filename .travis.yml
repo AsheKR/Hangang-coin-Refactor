@@ -20,6 +20,7 @@ install:
   - sudo chmod +x /usr/bin/ecs-deploy
 
 script:
+  - cd app
   - pytest --cov=./
 
 after_success:
