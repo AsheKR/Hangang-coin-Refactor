@@ -1,8 +1,10 @@
 import re
+from datetime import datetime, timedelta, time
 
 import requests
 from bs4 import BeautifulSoup
 from django.db import models
+from django.utils.timezone import make_aware
 
 
 class Coin(models.Model):
@@ -14,7 +16,7 @@ class Coin(models.Model):
     )
 
     @classmethod
-    def get_or_create_coin_with_currency_pair(cls, currency):
+    def get_or_create_coin_using_currency_pair(cls, currency):
         coin, _ = Coin.objects.get_or_create(name=currency)
         return coin
 
@@ -37,3 +39,62 @@ class Coin(models.Model):
                 pair = tr.find('a', href=re.compile(r'https://www.korbit.co.kr/*')).text
                 pair_name = re.sub(r'(\w+)/(\w+)', r'\g<1>_\g<2>', pair.lower())
                 cls.CURRENCY_PAIR.append((currency, pair_name))
+
+
+class CoinValue(models.Model):
+    coin = models.ForeignKey(
+        Coin,
+        on_delete=models.CASCADE,
+    )
+    value = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True, )
+    is_day_master = models.BooleanField(default=False, )
+
+    @classmethod
+    def create_now_coinvalue_with_coin(cls, coin):
+
+        def get_current_coin_value_through_korbit_api(pair):
+            def message(data):
+                """
+                json 파일을 받아 다음과 같이 사용하면 아래 내용을 가져올 수 있다.
+                """
+                last_price = int(data.get('last'))
+                high_price = int(data.get('high'))
+                low_price = int(data.get('low'))
+                bid_price = int(data.get('bid'))
+                ask_price = int(data.get('ask'))
+                timestamp = datetime.fromtimestamp(int(data.get('timestamp') / 1000))
+
+                # for Debug
+                return '''
+                    현재가: {:,}
+                    최근 24시간 최고가: {:,}
+                    최근 24시간 최저가: {:,}
+                    매수 호가: {:,}
+                    매도 호가: {:,}
+                    최종 체결 시각: {}
+                    '''.format(last_price, high_price, low_price, bid_price, ask_price, timestamp)
+
+            base_url = 'https://api.korbit.co.kr/v1/ticker/detailed'
+            url = '{}?currency_pair={}'.format(base_url, pair)
+            response = requests.get(url)
+            return response.json()
+
+        json_data = get_current_coin_value_through_korbit_api(dict(coin.CURRENCY_PAIR)[coin.name])
+        value = int(json_data.get('last'))
+        coin_value = CoinValue(
+            coin=coin,
+            value=value,
+        )
+
+        today = datetime.now().date()
+        tomorrow = today + timedelta(1)
+        today_start = make_aware(datetime.combine(today, time()))
+        today_end = make_aware(datetime.combine(tomorrow, time()))
+
+        if not CoinValue.objects.filter(coin=coin, created_at__lte=today_end, created_at__gte=today_start):
+            coin_value.is_day_master = True
+
+        coin_value.save()
+
+        return coin_value
