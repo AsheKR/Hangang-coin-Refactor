@@ -35,6 +35,7 @@ script:
 
 after_success:
   - codecov -t $CODECOV_TOEKEN
+  - cd ..
   - bash .bin/ecr_credentials.sh
   - bash .bin/docker_push.sh
   - bash .bin/ecs_deploy.sh
