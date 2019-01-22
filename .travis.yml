@@ -3,6 +3,9 @@ sudo: required
 services:
   - docker
 
+addons:
+  firefox: latest
+
 language: python
 python:
   - 3.6.6
@@ -13,8 +16,15 @@ before_install:
   - tar -xvf secrets.tar
 
 install:
+  # requirements
   - pip install pipenv
   - pipenv install --dev --system --ignore-pipfile
+  #  for test firefox browser
+  - wget https://github.com/mozilla/geckodriver/releases/download/v0.23.0/geckodriver-v0.23.0-linux64.tar.gz
+  - tar -xvzf geckodriver*
+  - chmod +x geckodriver
+  - sudo mv geckodriver /usr/local/bin/
+  # for awscli, ecs-deploy
   - sudo apt-get install jq
   - curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | sudo tee /usr/bin/ecs-deploy
   - sudo chmod +x /usr/bin/ecs-deploy
