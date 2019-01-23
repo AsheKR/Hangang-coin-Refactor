@@ -1,6 +1,7 @@
 import pytest
 
 from coin.models import Coin, CoinValue
+from river.models import River
 
 
 class TestCoinView:
@@ -39,4 +40,14 @@ class TestCoinView:
 
         response = client.get('/')
         html = response.content.decode('utf8')
-        assert '준비중입니다.' in html, 'Not have River, Error Page not returned'
+        assert '준비중입니다.' in html, 'Error Page must be returned'
+
+    def test_return_correct_page_with_river_data_when_latest_coin_value_is_smaller_than_master_coin_value(self, client):
+        coin = self.create_stub_coinvalue(50)
+        river = River.objects.create(temperature=2.4)
+
+        assert coin.latest_value < coin.today_master_value, 'master_value must be big'
+
+        response = client.get('/')
+        html = response.content.decode('utf8')
+        assert str(river.temperature) in html, 'River Data not Included'

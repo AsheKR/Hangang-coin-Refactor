@@ -11,5 +11,8 @@
     <div id="coin_name">코인 이름: {{ coin.name }}</div>
     <div id="today_master_value">오늘 시작 값: {{ coin.today_master_value }}</div>
     <div id="latest_value">최근 코인 값: {{ coin.latest_value }}</div>
+    {% if river %}
+        <div id="river_temperature">한강 수온: {{ river.temperature }}</div>
+    {% endif %}
 </body>
 </html>
