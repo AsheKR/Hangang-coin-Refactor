@@ -11,3 +11,4 @@ omit =
         *manage.py*
         *dev*
         *production*
+        */migrations/*
