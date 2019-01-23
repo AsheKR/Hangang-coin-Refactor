@@ -37,6 +37,7 @@ STATIC_URL = '/static/'
 
 INSTALLED_APPS = [
     'coin',
+    'river',
 
     'django.contrib.admin',
     'django.contrib.auth',
