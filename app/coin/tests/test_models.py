@@ -33,7 +33,7 @@ class TestCoinModel:
         assert second_value.is_day_master is False, 'is_day_master setting Failed'
 
     def test_crawling_all_coin(self):
-        Coin.get_all_coins_with_coin_Value()
+        Coin.get_all_coins_with_coin_value()
 
         assert Coin.objects.count() == 10, 'Ten Coin Data Crawling Failed'
         assert CoinValue.objects.filter(is_day_master=True).count() == 10, 'Ten CoinValue Crawling Failed'

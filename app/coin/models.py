@@ -41,7 +41,7 @@ class Coin(models.Model):
                 cls.CURRENCY_PAIR.append((currency, pair_name))
 
     @classmethod
-    def get_all_coins_with_coin_Value(cls):
+    def get_all_coins_with_coin_value(cls):
         if not cls.CURRENCY_PAIR:
             cls.get_top_10_coins_that_korbit_supports()
 
