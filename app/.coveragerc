@@ -12,3 +12,7 @@ omit =
         *dev*
         *production*
         */migrations/*
+
+[report]
+exclude_lines =
+        def __

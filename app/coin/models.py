@@ -15,6 +15,9 @@ class Coin(models.Model):
         unique=True,
     )
 
+    def __str__(self):
+        return self.name
+
     @classmethod
     def get_or_create_coin_using_currency_pair(cls, currency):
         coin, _ = Coin.objects.get_or_create(name=currency)
@@ -67,6 +70,9 @@ class CoinValue(models.Model):
     value = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True, )
     is_day_master = models.BooleanField(default=False, )
+
+    def __str__(self):
+        return self.coin.name + '의 현재값: ' + str(self.value)
 
     @classmethod
     def create_now_coinvalue_with_coin(cls, coin):

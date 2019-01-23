@@ -25,3 +25,16 @@ class TestCoinView:
         assert coin.name in html, 'CoinName Not Included'
         assert str(coin.coinvalue_set.first().value) in html, 'First CoinValue Not Included'
         assert str(coin.coinvalue_set.last().value) in html, 'Last CoinName Not Included'
+
+    def test_do_not_have_coin_data_return_wait_page(self, client):
+        response = client.get('/')
+
+        html = response.content.decode('utf8')
+        assert '준비중입니다.' in html, 'Not have Coin, Error Page not returned'
+
+    def test_do_not_have_two_coin_value_data_return_wait_page(self, client):
+        Coin.objects.create(name='stub')
+        response = client.get('/')
+
+        html = response.content.decode('utf8')
+        assert '준비중입니다.' in html, 'Not have two CoinValue, Error Page not returned'
