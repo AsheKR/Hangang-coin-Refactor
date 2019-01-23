@@ -29,7 +29,7 @@ class NewVisitorTest(FunctionalTest):
         self.assertIn(river_temperature, self.river.temperature)
 
         # today_master_value보다 latest_value가 올라갔다면 한강 수온을 가져오지 않는다.
-        self.coin.coinvalue_set.create(value=self.coin.latest_value - 100)
+        self.coin.coinvalue_set.create(value=self.coin.latest_value + 100)
         self.browser.get(self.live_server_url)
 
         # 한강수온이 있는지 확인한다.
