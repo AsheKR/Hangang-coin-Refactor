@@ -12,4 +12,11 @@ app = Celery('tasks',
              backend='redis://'+url+':6379/0'
              )
 
+app.conf.beat_schedule = {
+    'add-every-1-min': {
+        'task': 'coin.tasks.get_all_coin_with_celery',
+        'schedule': 60.0,
+    },
+}
+
 app.autodiscover_tasks()
