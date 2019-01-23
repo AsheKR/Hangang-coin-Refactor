@@ -13,9 +13,13 @@ app = Celery('tasks',
              )
 
 app.conf.beat_schedule = {
-    'add-every-1-min': {
+    'crawling-coin-every-1-min': {
         'task': 'coin.tasks.get_all_coin_with_celery',
         'schedule': 60.0,
+    },
+    'crawling-river-every-30-min': {
+        'task': 'river.tasks.get_river_temperature_with_celery',
+        'schedule': 180.0,
     },
 }
 
