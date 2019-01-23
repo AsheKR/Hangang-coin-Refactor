@@ -38,3 +38,12 @@ class TestCoinView:
 
         html = response.content.decode('utf8')
         assert '준비중입니다.' in html, 'Not have two CoinValue, Error Page not returned'
+
+    def test_return_wait_page_when_latest_coin_value_is_smaller_than_master_coin_value_and_not_have_river_data(self, client):
+        coin = self.create_stub_coinvalue(50)
+
+        assert coin.latest_value < coin.today_master_value, 'master_value must be big'
+
+        response = client.get('/')
+        html = response.content.decode('utf8')
+        assert '준비중입니다.' in html, 'Not have River, Error Page not returned'
