@@ -40,6 +40,16 @@ class Coin(models.Model):
                 pair_name = re.sub(r'(\w+)/(\w+)', r'\g<1>_\g<2>', pair.lower())
                 cls.CURRENCY_PAIR.append((currency, pair_name))
 
+    @classmethod
+    def get_all_coins_with_coin_Value(cls):
+        if not cls.CURRENCY_PAIR:
+            cls.get_top_10_coins_that_korbit_supports()
+
+        for currency, pair in cls.CURRENCY_PAIR:
+            coin = cls.get_or_create_coin_using_currency_pair(currency)
+            CoinValue.create_now_coinvalue_with_coin(coin)
+
+
     @property
     def today_master_value(self):
         return self.coinvalue_set.filter(is_day_master=True).last().value
@@ -89,7 +99,7 @@ class CoinValue(models.Model):
             return response.json()
 
         json_data = get_current_coin_value_through_korbit_api(dict(coin.CURRENCY_PAIR)[coin.name])
-        value = int(json_data.get('last'))
+        value = int(float(json_data.get('last')))
         coin_value = CoinValue(
             coin=coin,
             value=value,
