@@ -1,3 +1,5 @@
+from selenium.common.exceptions import NoSuchElementException
+
 from .base import FunctionalTest
 
 
@@ -11,9 +13,27 @@ class NewVisitorTest(FunctionalTest):
         self.assertIn('한강 코인', self.browser.title)
 
         # 현재 코인값과 대표값이 내려왔는지 확인한다.
+        coin_name = self.browser.find_element_by_id('coin_name').text
+        today_master_value = self.browser.find_element_by_id('today_master_value').text
+        latest_value = self.browser.find_element_by_id('latest_value').text
 
-        # 현재값과 대표값을 비교해서 등락률에 따른 색을 확인한다.
+        self.assertIn(self.coin.name, coin_name)
+        self.assertIn(str(self.coin.today_master_value), today_master_value)
+        self.assertIn(str(self.coin.latest_value), latest_value)
 
-        # 현재값과 대표값을 비교해서 등락률에 따른 화살표 방향을 확인한다.
+    def test_river_temperature_appears_in_a_particular_situation(self):
+        # today_master_value보다 latest_value가 떨어졌다면 한강 수온을 가져온다.
+        self.coin.coinvalue_set.create(value=self.coin.latest_value - 100)
+        self.browser.get(self.live_server_url)
 
-        # 모두 확인했으면 사이트를 종료한다.
+        # 한강수온이 있는지 확인한다.
+        river_temperature = self.browser.find_element_by_id('river_temperature').text
+        self.assertIn(str(self.river.temperature), river_temperature)
+
+        # today_master_value보다 latest_value가 올라갔다면 한강 수온을 가져오지 않는다.
+        self.coin.coinvalue_set.create(value=self.coin.latest_value + 100)
+        self.browser.get(self.live_server_url)
+
+        # 한강수온이 있는지 확인한다.
+        with self.assertRaises(NoSuchElementException):
+            self.browser.find_element_by_id('river_temperature')
