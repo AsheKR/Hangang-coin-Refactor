@@ -35,8 +35,5 @@ class NewVisitorTest(FunctionalTest):
         self.browser.get(self.live_server_url)
 
         # 한강수온이 있는지 확인한다.
-        try:
-            river_temperature_founded = self.browser.find_element_by_id('river_temperature').size()
-            self.assertEqual(river_temperature_founded, 0)
-        except NoSuchElementException:
-            pass
+        with self.assertRaises(NoSuchElementException):
+            self.browser.find_element_by_id('river_temperature')
