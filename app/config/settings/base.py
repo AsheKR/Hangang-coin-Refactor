@@ -33,6 +33,10 @@ SECRET_KEY = "4e+n)vnn_z)&r9%&4lh#+omtgkq7#v&de3rh)n#ky*p(#gp8mz"
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    STATIC_DIR,
+]
+
 # Application definition
 
 INSTALLED_APPS = [

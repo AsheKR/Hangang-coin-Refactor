@@ -10,10 +10,6 @@ ALLOWED_HOSTS = [
     'localhost',
 ]
 
-STATICFILES_DIRS = [
-    STATIC_DIR,
-]
-
 WSGI_APPLICATION = 'config.wsgi.dev.application'
 
 
