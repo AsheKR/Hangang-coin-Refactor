@@ -5,7 +5,6 @@ from .base import FunctionalTest
 
 class PageConversionTest(FunctionalTest):
 
-    @pytest.mark.smoke
     def test_checkout_other_coin(self):
         # 홈페이지를 방문한다.
         self.browser.get(self.live_server_url)
