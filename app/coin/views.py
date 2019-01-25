@@ -8,6 +8,7 @@ from river.models import River
 
 def home_page(request):
     coin = Coin.objects.first()
+    coin_list = Coin.CURRENCY_PAIR
     river = None
 
     try:
@@ -20,5 +21,6 @@ def home_page(request):
 
     return render(request, 'home.html', context={
         'coin': coin,
+        'coin_list': coin_list,
         'river': river
     })

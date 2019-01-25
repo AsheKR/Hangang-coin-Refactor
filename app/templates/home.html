@@ -14,5 +14,12 @@
     {% if river %}
         <div id="river_temperature">한강 수온: {{ river.temperature }}</div>
     {% endif %}
+    <div id="select_coin">
+        <ul>
+        {% for currency, _ in coin_list %}
+            <li>{{ currency }}</li>
+        {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>

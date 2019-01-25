@@ -1,3 +1,4 @@
+import pytest
 from selenium.common.exceptions import NoSuchElementException
 
 from coin.models import Coin
@@ -48,4 +49,4 @@ class NewVisitorTest(FunctionalTest):
         print(select_coin_list)
 
         for currency, _ in coin_list:
-            self.assertContains(currency, select_coin_list)
+            self.assertIn(currency, select_coin_list)

@@ -7,7 +7,7 @@ from river.models import River
 class TestCoinView:
 
     def create_stub_coinvalue(self, second_value):
-        coin = Coin.objects.create(name='Bitcoin')
+        coin, _ = Coin.objects.get_or_create(name='Bitcoin')
         CoinValue.objects.create(coin=coin, value=100, is_day_master=True)
         CoinValue.objects.create(coin=coin, value=second_value)
 
@@ -51,3 +51,12 @@ class TestCoinView:
         response = client.get('/')
         html = response.content.decode('utf8')
         assert str(river.temperature) in html, 'River Data not Included'
+
+    def test_return_correct_page_with_coin_list(self, client):
+        Coin.get_top_10_coins_that_korbit_supports()
+        coin = self.create_stub_coinvalue(200)
+
+        response = client.get('/')
+        html = response.content.decode('utf8')
+        for currency, _ in Coin.CURRENCY_PAIR:
+            assert currency in html, 'CURRENCY_PAIR not Included'

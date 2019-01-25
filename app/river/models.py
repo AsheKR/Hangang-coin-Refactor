@@ -16,7 +16,7 @@ class River(models.Model):
         url = 'http://www.koreawqi.go.kr/index_web.jsp'
 
         options = Options()
-        # options.headless = True
+        options.headless = True
         browser = webdriver.Firefox(options=options)
 
         browser.get(url)
