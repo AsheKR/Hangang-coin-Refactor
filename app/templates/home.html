@@ -23,11 +23,13 @@
     <div id="select_coin">
         <ul>
         {% for currency in coin_list %}
-            <li><input type="radio" name="coin" value="{{ currency.name }}"
+            <li><input type="radio" name="coin"
+                       value="{{ currency.name }}"
+                       id="{{ currency.name }}"
                     {% ifequal coin.name currency.name %}
                        checked
                     {% endifequal %}
-            > {{ currency.name }}</li>
+            ><label for="{{ currency.name }}">{{ currency.name }}</label></li>
         {% endfor %}
         </ul>
     </div>
