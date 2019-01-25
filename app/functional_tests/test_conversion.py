@@ -1,5 +1,4 @@
 import pytest
-from django.contrib.staticfiles import finders
 
 from .base import FunctionalTest
 
@@ -13,15 +12,19 @@ class PageConversionTest(FunctionalTest):
 
         # 코인을 선택한다.
         elem = self.browser.find_elements_by_css_selector("input[type='radio']")[5]
-        coin_name_from_checked = elem.get_attribute('value')
+        before_checked_coin_name = elem.get_attribute('value')
         elem.click()
 
         # 확인 버튼을 누른다.
         self.browser.find_element_by_id('send_coin_name').click()
 
         # URL에서 페이지 이동을 확인한다.
-        self.assertIn(self.browser.current_url, coin_name_from_checked)
+        self.assertIn(before_checked_coin_name, self.browser.current_url)
 
         # 화면에 내려온 데이터의 코인 이름과 값을 확인한다.
         coin_name = self.browser.find_element_by_id('coin_name').text
-        self.assertEqual(coin_name_from_checked, coin_name)
+        self.assertIn(before_checked_coin_name, coin_name)
+
+        # 체크되어있는 코인이 현재 코인인지 확인한다.
+        after_checked_coin_name = self.browser.find_element_by_css_selector("input[type='radio']:checked").get_attribute('value')
+        self.assertIn(after_checked_coin_name, coin_name)
