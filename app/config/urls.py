@@ -23,4 +23,5 @@ from coin.views import home_page as home
 urlpatterns = [
     path('', home, ),
     path('admin/', admin.site.urls),
+    path('coin/<str:coin>/', home),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

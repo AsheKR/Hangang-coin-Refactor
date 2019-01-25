@@ -60,3 +60,11 @@ class TestCoinView:
         html = response.content.decode('utf8')
         for currency, _ in Coin.CURRENCY_PAIR:
             assert currency in html, 'CURRENCY_PAIR not Included'
+
+    @pytest.mark.smoke
+    def test_return_specific_coin_page(self, client):
+        coin = self.create_stub_coinvalue(200)
+
+        response = client.get('/coin/'+coin.name+'/')
+        html = response.content.decode('utf8')
+        assert coin.name in html, 'specific coin name not appear'
