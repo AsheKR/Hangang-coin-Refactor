@@ -22,7 +22,7 @@
     {% endif %}
     <div id="select_coin">
         <ul>
-        {% for currency, _ in coin_list %}
+        {% for currency in coin_list %}
             <li><input type="radio" name="coin" value="{{ currency }}"
                     {% if forloop.counter == 1 %}
                        checked

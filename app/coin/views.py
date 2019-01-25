@@ -7,7 +7,7 @@ from river.models import River
 
 
 def home_page(request, coin=None):
-    coin_list = Coin.CURRENCY_PAIR
+    coin_list = Coin.objects.all()
     river = None
 
     try:

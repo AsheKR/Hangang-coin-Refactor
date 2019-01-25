@@ -53,15 +53,13 @@ class TestCoinView:
         assert str(river.temperature) in html, 'River Data not Included'
 
     def test_return_correct_page_with_coin_list(self, client):
-        Coin.get_top_10_coins_that_korbit_supports()
-        coin = self.create_stub_coinvalue(200, 'Bitcoin')
+        Coin.get_all_coins_with_coin_value()
 
         response = client.get('/')
         html = response.content.decode('utf8')
         for currency, _ in Coin.CURRENCY_PAIR:
             assert currency in html, 'CURRENCY_PAIR not Included'
 
-    @pytest.mark.smoke
     def test_return_specific_coin_page(self, client):
         coin_first = self.create_stub_coinvalue(200, 'Bitcoin')
         coin_second = self.create_stub_coinvalue(200, 'NewCoin')
