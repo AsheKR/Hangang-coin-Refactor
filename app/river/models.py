@@ -2,6 +2,7 @@ import time
 
 from bs4 import BeautifulSoup
 from django.db import models
+from pyvirtualdisplay import Display
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.firefox.options import Options
@@ -14,6 +15,9 @@ class River(models.Model):
     @classmethod
     def get_river_temperature(cls):
         url = 'http://www.koreawqi.go.kr/index_web.jsp'
+
+        display = Display(visible=0, size=(1366, 768))
+        display.start()
 
         options = Options()
         options.headless = True
@@ -47,6 +51,7 @@ class River(models.Model):
                     raise e
             finally:
                 browser.quit()
+                display.stop()
 
         River.objects.create(
             temperature=temperature,
