@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 <html lang="ko">
 <head>
@@ -6,6 +8,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>한강 코인</title>
+
+    <!-- JS -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="{% static 'index.js/' %}"></script>
 </head>
 <body>
     <div id="coin_name">코인 이름: {{ coin.name }}</div>
@@ -14,5 +20,19 @@
     {% if river %}
         <div id="river_temperature">한강 수온: {{ river.temperature }}</div>
     {% endif %}
+    <div id="select_coin">
+        <ul>
+        {% for currency in coin_list %}
+            <li><input type="radio" name="coin"
+                       value="{{ currency.name }}"
+                       id="{{ currency.name }}"
+                    {% ifequal coin.name currency.name %}
+                       checked
+                    {% endifequal %}
+            ><label for="{{ currency.name }}">{{ currency.name }}</label></li>
+        {% endfor %}
+        </ul>
+    </div>
+    <button id="send_coin_name">확인</button>
 </body>
 </html>

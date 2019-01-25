@@ -1,4 +1,4 @@
-from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
@@ -6,7 +6,7 @@ from coin.models import Coin
 from river.models import River
 
 
-class FunctionalTest(LiveServerTestCase):
+class FunctionalTest(StaticLiveServerTestCase):
 
     def setUp(self):
         options = Options()

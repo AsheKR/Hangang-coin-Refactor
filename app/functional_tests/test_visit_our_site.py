@@ -1,5 +1,7 @@
+import pytest
 from selenium.common.exceptions import NoSuchElementException
 
+from coin.models import Coin
 from .base import FunctionalTest
 
 
@@ -37,3 +39,17 @@ class NewVisitorTest(FunctionalTest):
         # 한강수온이 있는지 확인한다.
         with self.assertRaises(NoSuchElementException):
             self.browser.find_element_by_id('river_temperature')
+
+    def test_ten_coin_list_appears_in_index(self):
+        self.browser.get(self.live_server_url)
+
+        coin_list = Coin.CURRENCY_PAIR
+
+        select_coin_list = self.browser.find_element_by_id('select_coin').get_attribute('innerHTML')
+        print(select_coin_list)
+
+        for currency, _ in coin_list:
+            self.assertIn(currency, select_coin_list)
+
+        elem = self.browser.find_element_by_css_selector("input[type='radio'][value='Bitcoin']")
+        self.assertEqual(elem.is_selected(), True)
