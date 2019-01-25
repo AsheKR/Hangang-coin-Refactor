@@ -11,13 +11,6 @@ RUN                         apt -y install supervisor nginx && \
                             pip3 install gunicorn && \
                             pip3 install pipenv
 
-RUN                         wget -q "https://github.com/mozilla/geckodriver/releases/download/v0.23.0/geckodriver-v0.23.0-linux64.tar.gz" -O /tmp/geckodriver.tgz \
-                            && tar zxf /tmp/geckodriver.tgz -C /usr/bin/ \
-                            && rm /tmp/geckodriver.tgz
-
-RUN                         ln -s /usr/bin/geckodriver \
-                            && chmod 777 /usr/bin/geckodriver
-
 COPY                        Pipfile /tmp/Pipfile
 COPY                        Pipfile.lock /tmp/Pipfile.lock
 WORKDIR                     /tmp/
