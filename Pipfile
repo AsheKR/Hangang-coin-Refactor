@@ -16,6 +16,7 @@ sentry-sdk = "==0.6.6"
 beautifulsoup4 = "*"
 celery = {extras = ["redis"],version = "*"}
 selenium = "*"
+djangorestframework = "*"
 
 [requires]
 python_version = "3.6"
