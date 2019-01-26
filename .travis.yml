@@ -19,11 +19,8 @@ install:
   # requirements
   - pip install pipenv
   - pipenv install --dev --system --ignore-pipfile
-  #  for test firefox browser
-  - wget https://github.com/mozilla/geckodriver/releases/download/v0.23.0/geckodriver-v0.23.0-linux64.tar.gz
-  - tar -xvzf geckodriver*
-  - chmod +x geckodriver
-  - sudo mv geckodriver /usr/local/bin/
+  #  for test phantomjs
+  - sudo chmod +x ./.bin/phantomjs
   # for awscli, ecs-deploy
   - sudo apt-get install jq
   - curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | sudo tee /usr/bin/ecs-deploy

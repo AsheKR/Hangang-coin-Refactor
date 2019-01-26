@@ -4,9 +4,6 @@ COPY        ./ /srv/projects
 
 WORKDIR     /srv/projects/app
 
-RUN         ln -s ../.bin/geckodriver /usr/local/bin/geckodriver \
-            && chmod 777 /usr/local/bin/geckodriver
-
 RUN         python3 ./manage.py migrate
 RUN         python3 ./manage.py collectstatic --noinput
 
