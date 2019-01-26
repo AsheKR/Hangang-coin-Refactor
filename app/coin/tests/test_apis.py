@@ -14,7 +14,6 @@ class TestCoinApi:
 
         return coin
 
-    @pytest.mark.smoke
     def test_retrieve_coin_api(self, client):
         coin = self.create_stub_coinvalue(200, 'FakeCoin')
 
