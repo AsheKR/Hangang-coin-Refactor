@@ -8,8 +8,6 @@ ENV                         LC_ALL                  C.UTF-8
 RUN                         apt -y update
 RUN                         apt -y dist-upgrade
 RUN                         apt -y install supervisor nginx && \
-                            apt -y install firefox-esr && \
-                            apt -y install xvfb && \
                             pip3 install gunicorn && \
                             pip3 install pipenv
 
