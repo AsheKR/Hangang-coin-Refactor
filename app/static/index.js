@@ -58,7 +58,9 @@ var ChangeHTML = {
         globalVar.setFiveSc(setInterval(this.call_ajax, 10000))
     },
 
-    change_html: function() {
-
+    change_html: function(json_data) {
+        $('#today_master_value span').text(json_data['today_master_value'])
+        $('#latest_value span').text(json_data['latest_value'])
+        $('#percent').text(json_data['percent'])
     }
 }
