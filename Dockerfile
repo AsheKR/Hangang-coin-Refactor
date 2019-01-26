@@ -2,9 +2,6 @@ FROM        m41d/hangang-coin:base
 
 COPY        ./ /srv/projects
 
-RUN         ln -s ./.bin/geckodriver /usr/local/bin/geckodriver \
-            && chmod 777 /usr/local/bin/geckodriver
-
 WORKDIR     /srv/projects/app
 RUN         python3 ./manage.py migrate
 RUN         python3 ./manage.py collectstatic --noinput
