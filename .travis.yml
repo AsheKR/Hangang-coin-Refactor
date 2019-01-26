@@ -21,7 +21,7 @@ install:
   - pipenv install --dev --system --ignore-pipfile
   #  for test phantomjs
   - sudo chmod +x ./.bin/phantomjs
-  - sudo cp ./.bin/phantomjs /usr/local/bin/
+  - sudo cp -f ./.bin/phantomjs /usr/local/bin/
   # for awscli, ecs-deploy
   - sudo apt-get install jq
   - curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | sudo tee /usr/bin/ecs-deploy
