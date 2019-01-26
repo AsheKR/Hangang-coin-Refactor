@@ -4,8 +4,8 @@ COPY        ./ /srv/projects
 
 WORKDIR     /srv/projects/app
 
-RUN         cp ../.bin/geckodriver /usr/local/bin/geckodriver \
-            && chmod 777 /usr/local/bin/geckodriver
+RUN         chmod +x ../.bin/phantomjs && \
+            cp ../.bin/phantomjs /usr/local/bin/
 
 RUN         python3 ./manage.py migrate
 RUN         python3 ./manage.py collectstatic --noinput

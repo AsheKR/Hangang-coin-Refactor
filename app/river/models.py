@@ -16,13 +16,7 @@ class River(models.Model):
     def get_river_temperature(cls):
         url = 'http://www.koreawqi.go.kr/index_web.jsp'
 
-        display = Display(visible=0, size=(1366, 768))
-        display.start()
-
-        options = Options()
-        options.headless = True
-        browser = webdriver.Firefox(options=options)
-
+        browser = webdriver.PhantomJS()
         browser.get(url)
 
         start_time = time.time()

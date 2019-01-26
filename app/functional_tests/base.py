@@ -1,6 +1,5 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
 
 from coin.models import Coin
 from river.models import River
@@ -9,9 +8,7 @@ from river.models import River
 class FunctionalTest(StaticLiveServerTestCase):
 
     def setUp(self):
-        options = Options()
-        options.headless = True
-        self.browser = webdriver.Firefox(options=options)
+        self.browser = webdriver.PhantomJS()
         self.create_coinvalue_stub()
         self.create_river_stub()
 
