@@ -45,7 +45,6 @@ class River(models.Model):
                     raise e
             finally:
                 browser.quit()
-                display.stop()
 
         River.objects.create(
             temperature=temperature,
