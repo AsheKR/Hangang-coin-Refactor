@@ -4,8 +4,6 @@ COPY        ./ /srv/projects
 
 WORKDIR     /srv/projects/app
 
-RUN         chmod +x ../.bin/phantomjs
-
 RUN         python3 ./manage.py migrate
 RUN         python3 ./manage.py collectstatic --noinput
 

@@ -17,9 +17,9 @@ app.conf.beat_schedule = {
         'task': 'coin.tasks.get_all_coin_with_celery',
         'schedule': 60.0,
     },
-    'crawling-river-every-30-min': {
+    'crawling-river-every-one-day': {
         'task': 'river.tasks.get_river_temperature_with_celery',
-        'schedule': 180.0,
+        'schedule': 86400.0,
     },
 }
 
