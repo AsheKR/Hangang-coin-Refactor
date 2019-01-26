@@ -1,11 +1,11 @@
+import os
 import time
 
 from bs4 import BeautifulSoup
+from django.conf import settings
 from django.db import models
-from pyvirtualdisplay import Display
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
-from selenium.webdriver.firefox.options import Options
 
 
 class River(models.Model):
@@ -16,7 +16,7 @@ class River(models.Model):
     def get_river_temperature(cls):
         url = 'http://www.koreawqi.go.kr/index_web.jsp'
 
-        browser = webdriver.PhantomJS()
+        browser = webdriver.PhantomJS(os.path.join(settings.ROOT_DIR, '.bin', 'phantomjs'))
         browser.get(url)
 
         start_time = time.time()

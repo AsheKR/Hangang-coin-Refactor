@@ -1,3 +1,6 @@
+import os
+
+from django.conf import settings
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 
@@ -8,7 +11,7 @@ from river.models import River
 class FunctionalTest(StaticLiveServerTestCase):
 
     def setUp(self):
-        self.browser = webdriver.PhantomJS()
+        self.browser = webdriver.PhantomJS(os.path.join(settings.ROOT_DIR, '.bin', 'phantomjs'))
         self.create_coinvalue_stub()
         self.create_river_stub()
 
