@@ -20,10 +20,12 @@ from django.urls import path
 
 from coin.apis.apis import CoinView
 from coin.views import home_page as home
+from river.apis.apis import RiverView
 
 urlpatterns = [
     path('', home, ),
     path('admin/', admin.site.urls),
     path('coin/<str:coin>/', home),
     path('api/coin/<str:coin>/', CoinView.as_view()),
+    path('api/river/', RiverView.as_view()),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
