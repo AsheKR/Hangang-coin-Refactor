@@ -61,6 +61,11 @@ class Coin(models.Model):
     def latest_value(self):
         return self.coinvalue_set.last().value
 
+    @property
+    def percent(self):
+        percent = ((self.latest_value / self.today_master_value) - 1) * 100
+        return float('{0:.2f}'.format(percent))
+
 
 class CoinValue(models.Model):
     coin = models.ForeignKey(

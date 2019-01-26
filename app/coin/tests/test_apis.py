@@ -1,5 +1,7 @@
 import json
 
+import pytest
+
 from coin.models import Coin, CoinValue
 
 
@@ -12,6 +14,7 @@ class TestCoinApi:
 
         return coin
 
+    @pytest.mark.smoke
     def test_retrieve_coin_api(self, client):
         coin = self.create_stub_coinvalue(200, 'FakeCoin')
 
@@ -21,4 +24,4 @@ class TestCoinApi:
         assert json_data['today_master_value'] == coin.today_master_value
         assert json_data['percent'] == 100.0
         assert json_data['coin_name'] == coin.name
-        assert 'p_15_20' in json_data['image']
+        assert '/static/images/up/p15_20/' in json_data['image']
