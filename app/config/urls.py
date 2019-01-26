@@ -18,10 +18,12 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
+from coin.apis.apis import CoinView
 from coin.views import home_page as home
 
 urlpatterns = [
     path('', home, ),
     path('admin/', admin.site.urls),
     path('coin/<str:coin>/', home),
+    path('api/coin/<str:coin>/', CoinView.as_view()),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
