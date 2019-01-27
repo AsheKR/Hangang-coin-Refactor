@@ -1,38 +1,29 @@
 sudo: required
-
 services:
-  - docker
-
+- docker
 addons:
   firefox: latest
-
 language: python
 python:
-  - 3.6.6
-
+- 3.6.6
 before_install:
-  - openssl aes-256-cbc -K $encrypted_3a3073cf4f6a_key -iv $encrypted_3a3073cf4f6a_iv
-    -in secrets.tar.enc -out secrets.tar -d
-  - tar -xvf secrets.tar
-
+- openssl aes-256-cbc -K $encrypted_3a3073cf4f6a_key -iv $encrypted_3a3073cf4f6a_iv
+  -in secrets.tar.enc -out secrets.tar -d
+- tar -xvf secrets.tar
 install:
-  # requirements
-  - pip install pipenv
-  - pipenv install --dev --system --ignore-pipfile
-  #  for test phantomjs
-  - sudo chmod +x ./.bin/phantomjs
-  # for awscli, ecs-deploy
-  - sudo apt-get install jq
-  - curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | sudo tee /usr/bin/ecs-deploy
-  - sudo chmod +x /usr/bin/ecs-deploy
-
+- pip install pipenv
+- pipenv install --dev --system --ignore-pipfile
+- sudo chmod +x ./.bin/phantomjs
+- sudo apt-get install jq
+- curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy
+  | sudo tee /usr/bin/ecs-deploy
+- sudo chmod +x /usr/bin/ecs-deploy
 script:
-  - cd app
-  - pytest --cov=./
-
+- cd app
+- pytest --cov=./
 after_success:
-  - codecov -t $CODECOV_TOEKEN
-  - cd ..
-  - bash .bin/ecr_credentials.sh
-  - bash .bin/docker_push.sh
-  - bash .bin/ecs_deploy.sh
+- codecov -t $CODECOV_TOEKEN
+- cd ..
+- bash .bin/ecr_credentials.sh
+- bash .bin/docker_push.sh
+- bash .bin/ecs_deploy.sh
