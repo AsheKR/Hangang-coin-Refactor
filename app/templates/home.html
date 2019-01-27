@@ -9,18 +9,31 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>한강 코인</title>
 
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+
     <!-- JS -->
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script src="{% static 'index.js' %}"></script>
 </head>
 <body>
-    <div id="coin_name">코인 이름: <span>{{ coin.name }}</span></div>
-    <div id="today_master_value">오늘 시작 값: <span>{{ coin.today_master_value }}</span></div>
-    <div id="latest_value">최근 코인 값: <span>{{ coin.latest_value }}</span></div>
-    {% if river %}
-    <div id="river_temperature">한강 수온: <span>{{ river.temperature }}</span></div>
-    {% endif %}
-    <div id="percent"></div>
+    <div id="main">
+        <div id="section1">
+            <div class="wrap"></div>
+            <div class="content">
+                <div id="coin_name">코인 이름: <span>{{ coin.name }}</span></div>
+                <div id="today_master_value">오늘 시작 값: <span>{{ coin.today_master_value }}</span></div>
+                <div id="latest_value">최근 코인 값: <span>{{ coin.latest_value }}</span></div>
+                {% if river %}
+                <div id="river_temperature">한강 수온: <span>{{ river.temperature }}</span></div>
+                {% endif %}
+                <div id="percent"></div>
+            </div>
+        </div>
+        <div id="section2">
+            <div class="wrap"></div>
+        </div>
+    </div>
     <div id="select_coin">
         <ul>
         {% for currency in coin_list %}
@@ -33,7 +46,7 @@
             ><label for="{{ currency.name }}">{{ currency.name }}</label></li>
         {% endfor %}
         </ul>
+        <button id="send_coin_name">확인</button>
     </div>
-    <button id="send_coin_name">확인</button>
 </body>
 </html>
