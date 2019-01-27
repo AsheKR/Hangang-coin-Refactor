@@ -4,7 +4,6 @@ COPY        ./ /srv/projects
 
 WORKDIR     /srv/projects/app
 
-RUN         python3 ./manage.py migrate
 RUN         python3 ./manage.py collectstatic --noinput
 
 RUN         rm -rf /etc/nginx/sites-enabled/* && \
