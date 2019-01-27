@@ -44,3 +44,5 @@ CI / CD: Travis CI (Docker Hub에 Image를 푸시하는것과 ECS를 Blue/Green 
 2. Functional_test에서 setUp 데이터를 공유하고싶은데 어떻게 안될까?
 
 3. Trello를 어떻게 작성해야할지 아직 잘 모르겠다..
+
+4. ECR은 Free Tier 제한이 있다. 돈을 쓰기 싫다면 Docker Hub를 사용하자.
