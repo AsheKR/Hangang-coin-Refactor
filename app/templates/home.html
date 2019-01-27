@@ -9,6 +9,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>한강 코인</title>
 
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/solid.css" integrity="sha384-rdyFrfAIC05c5ph7BKz3l5NG5yEottvO/DQ0dCrwD8gzeQDjYBHNr1ucUpQuljos" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/fontawesome.css" integrity="sha384-u5J7JghGz0qUrmEsWzBQkfvc8nK3fUT7DCaQzNQ+q4oEXhGSx+P2OqjWsfIRB8QT" crossorigin="anonymous">
+
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'index.css' %}">
 
@@ -21,20 +25,28 @@
         <div id="section1">
             <div class="wrap"></div>
             <div class="content">
-                <div id="coin_name">코인 이름: <span>{{ coin.name }}</span></div>
+                <div id="coin_name"><span>{{ coin.name }}</span></div>
                 <div id="today_master_value">오늘 시작 값: <span>{{ coin.today_master_value }}</span></div>
                 <div id="latest_value">최근 코인 값: <span>{{ coin.latest_value }}</span></div>
-                {% if river %}
-                <div id="river_temperature">한강 수온: <span>{{ river.temperature }}</span></div>
-                {% endif %}
-                <div id="percent"></div>
+                <div id="percent"><span></span> %</div>
             </div>
         </div>
         <div id="section2">
             <div class="wrap"></div>
+            {% if river %}
+                <div id="river_temperature">한강 수온: <span>{{ river.temperature }}</span></div>
+            {% endif %}
         </div>
     </div>
+
+    <button id="select-coin-button">
+        <div></div>
+        <div></div>
+        <div></div>
+    </button>
+
     <div id="select_coin">
+        <h3>코인 선택</h3>
         <ul>
         {% for currency in coin_list %}
             <li><input type="radio" name="coin"
@@ -47,6 +59,7 @@
         {% endfor %}
         </ul>
         <button id="send_coin_name">확인</button>
+        <button id="send_coin_exit">닫기</button>
     </div>
 </body>
 </html>

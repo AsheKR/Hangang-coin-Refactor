@@ -1,8 +1,18 @@
 $(function() {
+
+    $('#select-coin-button').click(function() {
+        $('#select_coin').css('display', 'block')
+    })
+
     $('#send_coin_name').click(function() {
         uri = $('input[type=radio][name=coin]:checked').val()
         window.location.href = '/coin/'+uri+'/'
     })
+
+    $('#send_coin_exit').click(function() {
+        $('#select_coin').css('display', 'none')
+    })
+
     ChangeHTML.init()
 })
 
@@ -49,7 +59,6 @@ var ChangeHTML = {
             url: url,
             success: function(data) {
                 ChangeHTML.change_html(data);
-                console.log(data);
             }
         })
     },
@@ -59,8 +68,16 @@ var ChangeHTML = {
     },
 
     change_html: function(json_data) {
+
         $('#today_master_value span').text(json_data['today_master_value'])
         $('#latest_value span').text(json_data['latest_value'])
-        $('#percent').text(json_data['percent'])
+        $('#section1').css('background-image', 'url("'+json_data['image']+'")')
+        $('#percent span').text(json_data['percent'])
+
+        if (json_data['today_master_value'] > json_data['latest_value']) {
+            $('#percent').css('color', 'red')
+        } else {
+            $('#percent').css('color', 'green')
+        }
     }
 }
