@@ -48,10 +48,18 @@ div#section1 > div.content {
     align-self: center;
 }
 
-div #section1 > div.content > div {
+div#section1 > div.content > div {
     justify-self: center;
     align-self: center;
     padding-bottom: 5px;
+}
+
+div#section1 > div.content > div#percent {
+    display: flex;
+}
+
+div#section1 > div.content > div#percent > i {
+    margin-right: 10px;
 }
 
 div#section2 {

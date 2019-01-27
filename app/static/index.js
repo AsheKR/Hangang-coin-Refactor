@@ -74,10 +74,15 @@ var ChangeHTML = {
         $('#section1').css('background-image', 'url("'+json_data['image']+'")')
         $('#percent span').text(json_data['percent'])
 
+        $('#percent .fas').removeClass('fa-sort-down')
+        $('#percent .fas').removeClass('fa-sort-up')
+
         if (json_data['today_master_value'] > json_data['latest_value']) {
             $('#percent').css('color', 'red')
+            $('#percent .fas').addClass('fa-sort-down')
         } else {
             $('#percent').css('color', 'green')
+            $('#percent .fas').addClass('fa-sort-up')
         }
     }
 }
