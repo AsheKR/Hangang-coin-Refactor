@@ -56,6 +56,12 @@ div #section1 > div.content > div {
 
 div#section2 {
     position: relative;
+    display: grid;
+    padding-left: 5%;
+}
+
+div#section2 > div{
+    align-self: center;
 }
 
 div#select_coin {
