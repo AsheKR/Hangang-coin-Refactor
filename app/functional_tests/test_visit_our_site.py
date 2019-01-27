@@ -51,5 +51,7 @@ class NewVisitorTest(FunctionalTest):
         for currency, _ in coin_list:
             self.assertIn(currency, select_coin_list)
 
-        elem = self.browser.find_element_by_css_selector("input[type='radio'][value='Bitcoin']")
+        coin = Coin.objects.first()
+
+        elem = self.browser.find_element_by_css_selector("input[type='radio'][value='"+coin.name+"']")
         self.assertEqual(elem.is_selected(), True)
