@@ -78,9 +78,11 @@ var ChangeHTML = {
         $('#percent .fas').removeClass('fa-sort-up')
 
         if (json_data['today_master_value'] > json_data['latest_value']) {
+            $('#latest_value').css('color', 'red')
             $('#percent').css('color', 'red')
             $('#percent .fas').addClass('fa-sort-down')
         } else {
+            $('#latest_value').css('color', 'green')
             $('#percent').css('color', 'green')
             $('#percent .fas').addClass('fa-sort-up')
         }

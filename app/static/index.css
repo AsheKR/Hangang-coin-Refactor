@@ -56,6 +56,7 @@ div#section1 > div.content > div {
 
 div#section1 > div.content > div#percent {
     display: flex;
+    align-items: center;
 }
 
 div#section1 > div.content > div#percent > i {
