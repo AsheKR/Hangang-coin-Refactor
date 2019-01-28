@@ -14,6 +14,8 @@ app = Celery('tasks',
              backend=backend,
              )
 
+app.conf.result_expires = 60
+
 app.conf.beat_schedule = {
     'crawling-coin-every-1-min': {
         'task': 'coin.tasks.get_all_coin_with_celery',
