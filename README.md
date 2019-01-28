@@ -46,3 +46,7 @@ CI / CD: Travis CI (Docker Hub에 Image를 푸시하는것과 ECS를 Blue/Green 
 3. Trello를 어떻게 작성해야할지 아직 잘 모르겠다..
 
 4. ECR은 Free Tier 제한이 있다. 돈을 쓰기 싫다면 Docker Hub를 사용하자.
+
+5. ALLOWED_HOST는 총 3개를 추가해주었다. 두개가 정적이기때문에 어떻게 해결할 방법을 찾아야한다..
+  - `http://169.254.169.254/latest/meta-data/local-ipv4`
+  - `정적으로 두개`
