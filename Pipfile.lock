@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "6959eae779e17bee7ca50f4f2166c227caa04080d197a4b68fdd6ea4142a6061"
+            "sha256": "2c28aab6406de0d802ca1ea4f3778eee3e1af0bbb42a6ce3324480cbd73b5482"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -71,6 +71,14 @@
             "index": "pypi",
             "version": "==2.1.5"
         },
+        "django-allow-cidr": {
+            "hashes": [
+                "sha256:d9a3b22c14e91c26ddd010c278ddf7e2c69a5421c862a3a3cd448ae57fd833e8",
+                "sha256:e8708c0511a78b80d9b74f718ee46685a1425e6d3520143bd00c773fdca56cc7"
+            ],
+            "index": "pypi",
+            "version": "==0.3.1"
+        },
         "djangorestframework": {
             "hashes": [
                 "sha256:79c6efbb2514bc50cf25906d7c0a5cfead714c7af667ff4bd110312cd380ae66",
@@ -92,6 +100,13 @@
                 "sha256:3c9dca2338c5d893f30c151f5d29bfb81196748ab426d33c362ab51f1e8dbf78"
             ],
             "version": "==4.2.2.post1"
+        },
+        "netaddr": {
+            "hashes": [
+                "sha256:38aeec7cdd035081d3a4c306394b19d677623bf76fa0913f6695127c7753aefd",
+                "sha256:56b3558bd71f3f6999e4c52e349f38660e54a7a8a9943335f73dfc96883e08ca"
+            ],
+            "version": "==0.7.19"
         },
         "psycopg2-binary": {
             "hashes": [

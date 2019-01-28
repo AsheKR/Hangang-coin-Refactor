@@ -20,13 +20,15 @@ sentry_sdk.init(
 )
 
 # Health Check 도메인을 허용하는 코드
-try:
-    EC2_IP = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4').text
-    ALLOWED_HOSTS.append(EC2_IP)
-    ALLOWED_HOSTS.append('52.78.63.1')
-    ALLOWED_HOSTS.append('13.209.46.98')
-except requests.exceptions.RequestException:
-    pass
+# try:
+#     EC2_IP = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4').text
+#     ALLOWED_HOSTS.append(EC2_IP)
+#     ALLOWED_HOSTS.append('52.78.63.1')
+#     ALLOWED_HOSTS.append('13.209.46.98')
+# except requests.exceptions.RequestException:
+#     pass
+
+ALLOWED_CIDR_NETS = ['10.0.0.0/16']
 
 STATIC_ROOT = os.path.join(ROOT_DIR, '.static')
 
