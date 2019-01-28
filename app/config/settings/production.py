@@ -23,6 +23,8 @@ sentry_sdk.init(
 try:
     EC2_IP = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4').text
     ALLOWED_HOSTS.append(EC2_IP)
+    ALLOWED_HOSTS.append('52.78.63.1')
+    ALLOWED_HOSTS.append('13.209.46.98')
 except requests.exceptions.RequestException:
     pass
 
