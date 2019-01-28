@@ -18,7 +18,6 @@ celery = {extras = ["redis"],version = "*"}
 selenium = "*"
 djangorestframework = "*"
 psycopg2-binary = "*"
-django-allow-cidr = "*"
 
 [requires]
 python_version = "3.6"
