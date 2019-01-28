@@ -10,8 +10,7 @@ DEBUG = False
 
 # 아마존에서 제공해주는 URL에 접속을 허용하는 코드
 ALLOWED_HOSTS = [
-    '.amazonaws.com',
-    '.m41d.kr',
+    '*',
 ]
 
 sentry_sdk.init(
