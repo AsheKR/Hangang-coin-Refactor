@@ -23,3 +23,13 @@ app.conf.beat_schedule = {
 }
 
 app.autodiscover_tasks()
+
+
+
+# [program:celery-worker]
+# command=celery -A config worker -l debug
+# directory=/srv/projects/app
+#
+# [program:celery-beat]
+# command=celery -A config beat -l debug
+# directory=/srv/projects/app
