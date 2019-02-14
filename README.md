@@ -50,3 +50,5 @@ CI / CD: Travis CI (Docker Hub에 Image를 푸시하는것과 ECS를 Blue/Green 
 5. ALLOWED_HOST는 총 3개를 추가해주었다. 두개가 정적이기때문에 어떻게 해결할 방법을 찾아야한다..
   - `http://169.254.169.254/latest/meta-data/local-ipv4`
   - `정적으로 두개`
+
+6. Worker Lost(Signal 9)이 발생하여 주기적으로 서버가 다운된다.
