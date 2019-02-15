@@ -1,8 +1,6 @@
 sudo: required
 services:
 - docker
-addons:
-  firefox: latest
 language: python
 python:
 - 3.6.6
@@ -13,7 +11,6 @@ before_install:
 install:
 - pip install pipenv
 - pipenv install --dev --system --ignore-pipfile
-- sudo chmod +x ./.bin/phantomjs
 - sudo apt-get install jq
 - curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy
   | sudo tee /usr/bin/ecs-deploy
