@@ -9,7 +9,7 @@ else:
 
 app = Celery('tasks',
              broker='redis://'+url+':6379/0',
-             backend='redis://'+url+':6379/0',
+             backend='rpc://',
              )
 
 # app.conf.beat_schedule = {
