@@ -50,6 +50,16 @@ LOGGING = {
         }
     },
     'handlers': {
+        'celery_debug': {
+            'class': 'logging.handlers.RotatingFileHandler',
+            'level': 'DEBUG',
+            'filename': os.path.join(LOG_DIR, 'celery_debug.log'),
+            'formatter': 'default',
+            # 최대 1MB를 넘게되면 새 파일을 만들어 저장
+            'maxBytes': 1048576,
+            # 최대 파일은 10개
+            'backupCount': 10,
+        },
         'file_error': {
             'class': 'logging.handlers.RotatingFileHandler',
             'level': 'ERROR',
@@ -69,6 +79,11 @@ LOGGING = {
         'django': {
             'handlers': ['file_error', 'console'],
             'level': 'INFO',
+            'propagate': True,
+        },
+        'celery': {
+            'handlers': ['file_error', 'console'],
+            'level': 'DEBUG',
             'propagate': True,
         }
     }
